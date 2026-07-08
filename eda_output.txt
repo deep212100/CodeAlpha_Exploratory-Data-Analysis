@@ -1,0 +1,106 @@
+Shape: (891, 15)
+
+Dtypes:
+ survived         int64
+pclass           int64
+sex                str
+age            float64
+sibsp            int64
+parch            int64
+fare           float64
+embarked           str
+class              str
+who                str
+adult_male        bool
+deck               str
+embark_town        str
+alive              str
+alone             bool
+dtype: object
+
+Missing values:
+ survived         0
+pclass           0
+sex              0
+age            177
+sibsp            0
+parch            0
+fare             0
+embarked         2
+class            0
+who              0
+adult_male       0
+deck           688
+embark_town      2
+alive            0
+alone            0
+dtype: int64
+
+Describe (numeric):
+          survived      pclass         age       sibsp       parch        fare
+count  891.000000  891.000000  714.000000  891.000000  891.000000  891.000000
+mean     0.383838    2.308642   29.699118    0.523008    0.381594   32.204208
+std      0.486592    0.836071   14.526497    1.102743    0.806057   49.693429
+min      0.000000    1.000000    0.420000    0.000000    0.000000    0.000000
+25%      0.000000    2.000000   20.125000    0.000000    0.000000    7.910400
+50%      0.000000    3.000000   28.000000    0.000000    0.000000   14.454200
+75%      1.000000    3.000000   38.000000    1.000000    0.000000   31.000000
+max      1.000000    3.000000   80.000000    8.000000    6.000000  512.329200
+/home/claude/eda_titanic/run_eda.py:23: Pandas4Warning: For backward compatibility, 'str' dtypes are included by select_dtypes when 'object' dtype is specified. This behavior is deprecated and will be removed in a future version. Explicitly pass 'str' to `include` to select them, or to `exclude` to remove them and silence this warning.
+See https://pandas.pydata.org/docs/user_guide/migration-3-strings.html#string-migration-select-dtypes for details on how to write code that works with pandas 2 and 3.
+  print("\nDescribe (categorical):\n", df.describe(include="object"))
+
+Describe (categorical):
+          sex embarked  class  who deck  embark_town alive
+count    891      889    891  891  203          889   891
+unique     2        3      3    3    7            3     2
+top     male        S  Third  man    C  Southampton    no
+freq     577      644    491  537   59          644   549
+
+Overall survival rate: 38.38%
+/home/claude/eda_titanic/run_eda.py:35: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.countplot(data=df, x="survived", palette=["#d64545", "#4caf78"])
+/home/claude/eda_titanic/run_eda.py:44: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.barplot(data=df, x="sex", y="survived", palette="pastel")
+/home/claude/eda_titanic/run_eda.py:53: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.barplot(data=df, x="pclass", y="survived", palette="viridis")
+/home/claude/eda_titanic/run_eda.py:79: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df, x="pclass", y="fare", palette="Set2")
+/home/claude/eda_titanic/run_eda.py:99: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `y` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.barplot(x=missing.values, y=missing.index, palette="Reds_r")
+/home/claude/eda_titanic/run_eda.py:109: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.barplot(data=df, x="family_size", y="survived", palette="crest")
+
+--- Hypothesis Tests ---
+H1 - Sex vs Survival: chi2=260.72, p=0.000000 -> REJECT null (independence)
+H2 - Class vs Survival: chi2=102.89, p=0.000000 -> REJECT null (independence)
+H3 - Age (survived vs died): t=-2.05, p=0.041190 -> REJECT null (equal means)
+H4 - Fare (survived vs died): t=6.84, p=0.000000 -> REJECT null (equal means)
+
+--- Data Issues ---
+Duplicate rows: 107
+Missing 'age': 177 (19.9%)
+Missing 'deck': 688 (77.2%)
+Missing 'embarked'/'embark_town': 2
+Fare outliers (IQR method): 116 rows
+Max fare: 512.3292, Min fare: 0.0 (0 fare is suspicious)
+
+Done. Plots saved to ./plots/
